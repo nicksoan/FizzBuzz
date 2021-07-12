@@ -14,13 +14,6 @@ namespace FizzBuzz
             Run(startNo,runLength, checkModel);
         }
 
-        private static IEnumerable<IDivisimajig> GetModel()
-        {
-            Factories.DivisimajigFactory divisimajigFactory = new Factories.DivisimajigFactory();
-
-            return divisimajigFactory.Divisimajigs;
-        }
-
         private static void Run(int startNo, int runLength, IEnumerable<IDivisimajig> checkModel)
         {
             for (int i = startNo; i <= runLength; i++)
@@ -41,9 +34,14 @@ namespace FizzBuzz
                 }
                 outputNos = i.ToString();
 
-
                 Console.WriteLine($"{output} ({outputNos})");
             }
+        }
+        private static IEnumerable<IDivisimajig> GetModel()
+        {
+            Factories.DivisimajigFactory divisimajigFactory = new Factories.DivisimajigFactory();
+
+            return divisimajigFactory.Divisimajigs;
         }
     }
 }
