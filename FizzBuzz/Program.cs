@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
+using FizzBuzz.Functions;
 using FizzBuzz.Models;
 
 namespace FizzBuzz
@@ -8,11 +10,21 @@ namespace FizzBuzz
     {
         static void Main(string[] args)
         {
-            int startNo = 1;
+            int startNumber = 1;
             int runLength = 100;
-            IEnumerable<IDivisimajig> checkModel = GetModel();
-            Run(startNo,runLength, checkModel);
+            FizzBuzzFunctions fizzBuzzFunctions = new FizzBuzzFunctions();
+            IEnumerable<IDivisimajig> checkModel = fizzBuzzFunctions.GetDivisimajigs();
+            List<string> results = fizzBuzzFunctions.GenerateFizzBuzz(startNumber, runLength, checkModel);
+
+            foreach (string result in results)
+            {
+                Console.WriteLine(result);
+            }
+
+            //Run(startNo,runLength, checkModel);
         }
+
+
 
         private static void Run(int startNo, int runLength, IEnumerable<IDivisimajig> checkModel)
         {
@@ -38,11 +50,6 @@ namespace FizzBuzz
                 Console.WriteLine($"{output} ({outputNos})");
             }
         }
-        private static IEnumerable<IDivisimajig> GetModel()
-        {
-            Factories.DivisimajigFactory divisimajigFactory = new Factories.DivisimajigFactory();
 
-            return divisimajigFactory.Divisimajigs;
-        }
     }
 }

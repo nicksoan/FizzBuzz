@@ -9,17 +9,30 @@ namespace FizzBuzz.Factories
 {
     public class DivisimajigFactory
     {
-        public  IEnumerable<IDivisimajig> Divisimajigs { get; set; }
+        public IEnumerable<IDivisimajig> Divisimajigs { get; set; }
 
-        public DivisimajigFactory()
+        public DivisimajigFactory() : this(GetDefaultDivisimajigs()) { }
+
+        public DivisimajigFactory(IEnumerable<IDivisimajig> divisimajigs)
         {
-            List<IDivisimajig> divisimajigs = new List<IDivisimajig>();
-            divisimajigs.Add(new Bipp());
-            divisimajigs.Add(new Fizz());
-            divisimajigs.Add(new Buzz());
-            divisimajigs.Add(new Bozz());
-
             Divisimajigs = divisimajigs;
         }
+
+        private static List<IDivisimajig> GetDefaultDivisimajigs()
+        {
+            return new List<IDivisimajig>
+            {
+                new Bipp(),
+                new Fizz(),
+                new Buzz(),
+                new Bozz()
+            };
+        }
+
+        public static DivisimajigFactory Default()
+        {
+            return new DivisimajigFactory(GetDefaultDivisimajigs());
+        }
+
     }
 }
